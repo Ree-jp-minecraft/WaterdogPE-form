@@ -1,9 +1,10 @@
 plugins {
+    id("maven-publish")
     kotlin("jvm") version "1.6.10"
 }
 
 group = "net.ree_jp"
-version = "1.0-SNAPSHOT"
+version = "0.1-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -15,4 +16,17 @@ repositories {
 dependencies {
     compileOnly("dev.waterdog.waterdogpe:waterdog:1.1.5")
     implementation(kotlin("stdlib"))
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/ree-jp-minecraft/waterdogpe-form")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
 }
