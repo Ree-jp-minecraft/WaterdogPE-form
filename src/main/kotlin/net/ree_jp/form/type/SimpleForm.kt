@@ -25,7 +25,7 @@ class SimpleForm(private val title: String, private val content: String) : Form(
                 "buttons" to buttonsData
             )
         )
-        FormStore.instance.storeForm(p.name, this, formID)
+        pk.formId = FormStore.instance.storeForm(p.name, this, formID)
         p.sendPacket(pk)
     }
 

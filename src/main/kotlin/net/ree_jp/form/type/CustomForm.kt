@@ -27,7 +27,7 @@ class CustomForm(private val title: String, private val func: () -> Unit) : Form
                 "content" to elementsData
             )
         )
-        FormStore.instance.storeForm(p.name, this, formID)
+        pk.formId = FormStore.instance.storeForm(p.name, this, formID)
         p.sendPacket(pk)
     }
 

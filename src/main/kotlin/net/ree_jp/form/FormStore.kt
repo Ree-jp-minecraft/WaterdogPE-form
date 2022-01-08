@@ -10,7 +10,7 @@ class FormStore {
     private val allForms = mutableMapOf<String, Map<Int, Form>>()
     private val formIDCounter = mutableMapOf<String, Int>()
 
-    fun storeForm(user: String, form: Form, id: Int?) {
+    fun storeForm(user: String, form: Form, id: Int?): Int {
         var finalID = id
         if (finalID == null) {
             finalID = createFormID(user)
@@ -23,6 +23,7 @@ class FormStore {
             forms.toMutableMap()[finalID] = form
             allForms[user] = forms
         }
+        return finalID
     }
 
     private fun createFormID(user: String): Int {

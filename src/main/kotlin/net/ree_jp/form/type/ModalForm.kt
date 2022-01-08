@@ -25,7 +25,7 @@ class ModalForm(
                 "button2" to falseButton.toMap()
             )
         )
-        FormStore.instance.storeForm(p.name, this, formID)
+        pk.formId = FormStore.instance.storeForm(p.name, this, formID)
         p.sendPacket(pk)
     }
 
