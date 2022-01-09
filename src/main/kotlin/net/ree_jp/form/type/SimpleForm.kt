@@ -30,10 +30,14 @@ class SimpleForm(private val title: String, private val content: String) : Form(
     }
 
     override fun handle(response: String?) {
-        val buttonsID = response?.toInt()
+        val rPre = response?.removePrefix('"'.toString())
+        val rSu = rPre?.removeSuffix('"'.toString())
+        val buttonsID = rSu?.toInt()
 
         if (buttonsID != null) {
             elements[buttonsID].call()
+        } else {
+            print("unknown simple form response$response")
         }
     }
 
