@@ -5,7 +5,14 @@ import dev.waterdog.waterdogpe.player.ProxiedPlayer
 
 class FormReceiveService(private val store: FormStore, private val p: ProxiedPlayer) {
 
-    fun receive(pk: ModalFormResponsePacket) {
-        store.takeForm(p.name, pk.formId)?.handle(pk.formData)
+    fun receive(pk: ModalFormResponsePacket): Boolean {
+        val form = store.takeForm(p.name, pk.formId)
+
+        return if (form != null) {
+            form.handle(pk.formData)
+            true
+        } else {
+            false
+        }
     }
 }

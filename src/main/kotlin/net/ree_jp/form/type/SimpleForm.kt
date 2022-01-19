@@ -1,6 +1,7 @@
 package net.ree_jp.form.type
 
 import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
 import com.nukkitx.protocol.bedrock.packet.ModalFormRequestPacket
 import dev.waterdog.waterdogpe.player.ProxiedPlayer
 import net.ree_jp.form.FormStore
@@ -30,14 +31,19 @@ class SimpleForm(private val title: String, private val content: String) : Form(
     }
 
     override fun handle(response: String?) {
-        val rPre = response?.removePrefix('"'.toString())
-        val rSu = rPre?.removeSuffix('"'.toString())
-        val buttonsID = rSu?.toInt()
+        if (response == null) {
+            return
+        }
 
-        if (buttonsID != null) {
-            elements[buttonsID].call()
-        } else {
-            print("unknown simple form response$response")
+        try {
+            val buttonsID = Gson().fromJson(response, Int::class.java)
+            if (buttonsID != null) {
+                elements[buttonsID].call()
+            } else {
+                print("unknown simple form response$response")
+            }
+        } catch (e: JsonSyntaxException) {
+            e.printStackTrace()
         }
     }
 

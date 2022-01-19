@@ -1,6 +1,7 @@
 package net.ree_jp.form.type
 
 import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
 import com.google.gson.reflect.TypeToken
 import com.nukkitx.protocol.bedrock.packet.ModalFormRequestPacket
 import dev.waterdog.waterdogpe.player.ProxiedPlayer
@@ -32,13 +33,21 @@ class CustomForm(private val title: String, private val func: () -> Unit) : Form
     }
 
     override fun handle(response: String?) {
-        val results: Map<Int, String> = Gson().fromJson(response, object : TypeToken<Map<Int, String>>() {}.type)
-        elements.forEachIndexed { index, element ->
-            if (element is CustomFormResult) {
-                results[index]?.let { element.setResult(it) }
-            }
+        if (response == null) {
+            return
         }
-        func()
+
+        try {
+            val results: Map<Int, String> = Gson().fromJson(response, object : TypeToken<Map<Int, String>>() {}.type)
+            elements.forEachIndexed { index, element ->
+                if (element is CustomFormResult) {
+                    results[index]?.let { element.setResult(it) }
+                }
+            }
+            func()
+        } catch (e: JsonSyntaxException) {
+            e.printStackTrace()
+        }
     }
 
     fun addElement(vararg button: CustomFormElement) {
