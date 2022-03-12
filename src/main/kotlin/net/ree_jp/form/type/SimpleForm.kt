@@ -7,7 +7,8 @@ import dev.waterdog.waterdogpe.player.ProxiedPlayer
 import net.ree_jp.form.FormStore
 import net.ree_jp.form.elements.SimpleFormElement
 
-class SimpleForm(private val title: String, private val content: String) : Form() {
+class SimpleForm(private val title: String, private val content: String, private val closeFunc: (() -> Unit)? = null) :
+    Form() {
 
     private val elements = mutableListOf<SimpleFormElement>()
 
@@ -40,7 +41,7 @@ class SimpleForm(private val title: String, private val content: String) : Form(
             if (buttonsID != null) {
                 elements[buttonsID].call()
             } else {
-                print("unknown simple form response$response")
+                closeFunc?.let { it() }
             }
         } catch (e: JsonSyntaxException) {
             e.printStackTrace()

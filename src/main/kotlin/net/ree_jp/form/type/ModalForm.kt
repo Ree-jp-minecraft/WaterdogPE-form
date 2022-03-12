@@ -11,7 +11,8 @@ class ModalForm(
     private val title: String,
     private val content: String,
     private val trueButton: ModalFormButton,
-    private val falseButton: ModalFormButton
+    private val falseButton: ModalFormButton,
+    private val closeFunc: (() -> Unit)? = null
 ) : Form() {
 
     override fun sendForm(p: ProxiedPlayer) {
@@ -37,10 +38,14 @@ class ModalForm(
 
         try {
             val result = Gson().fromJson(response, Boolean::class.java)
-            if (result) {
-                trueButton.call()
+            if (result != null) {
+                if (result) {
+                    trueButton.call()
+                } else {
+                    falseButton.call()
+                }
             } else {
-                falseButton.call()
+                closeFunc?.let { it() }
             }
         } catch (e: JsonSyntaxException) {
             e.printStackTrace()
