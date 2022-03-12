@@ -7,7 +7,7 @@ class FormStore {
         val instance: FormStore = FormStore()
     }
 
-    private val allForms = mutableMapOf<String, Map<Int, Form>>()
+    private val allForms = mutableMapOf<String, MutableMap<Int, Form>>()
     private val formIDCounter = mutableMapOf<String, Int>()
 
     fun storeForm(user: String, form: Form, id: Int?): Int {
@@ -18,9 +18,9 @@ class FormStore {
 
         val forms = allForms[user]
         if (forms == null) {
-            allForms[user] = mapOf(finalID to form)
+            allForms[user] = mutableMapOf(finalID to form)
         } else {
-            forms.toMutableMap()[finalID] = form
+            forms[finalID] = form
             allForms[user] = forms
         }
         return finalID
@@ -40,7 +40,7 @@ class FormStore {
     fun takeForm(user: String, id: Int): Form? {
         allForms[user]?.let {
             val result = it[id]
-            it.toMutableMap().remove(id)
+            it.remove(id)
             return result
         }
 
