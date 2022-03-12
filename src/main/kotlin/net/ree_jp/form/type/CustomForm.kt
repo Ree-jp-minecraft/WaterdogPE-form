@@ -9,13 +9,14 @@ import net.ree_jp.form.FormStore
 import net.ree_jp.form.elements.CustomFormElement
 import net.ree_jp.form.elements.CustomFormResult
 
-class CustomForm(private val title: String, private val func: () -> Unit) : Form() {
+class CustomForm(private val title: String, private val func: () -> Unit, private val closeFunc: (() -> Unit)? = null) :
+    Form() {
 
     private val elements = mutableListOf<CustomFormElement>()
 
     override fun sendForm(p: ProxiedPlayer) {
         val pk = ModalFormRequestPacket()
-        val elementsData = mutableListOf<Map<String, String>>()
+        val elementsData = mutableListOf<Map<String, Any>>()
 
         elements.forEach { button ->
             elementsData.add(button.toMap())
@@ -38,13 +39,17 @@ class CustomForm(private val title: String, private val func: () -> Unit) : Form
         }
 
         try {
-            val results: Map<Int, String> = Gson().fromJson(response, object : TypeToken<Map<Int, String>>() {}.type)
-            elements.forEachIndexed { index, element ->
-                if (element is CustomFormResult) {
-                    results[index]?.let { element.setResult(it) }
+            val results: Map<Int, String>? = Gson().fromJson(response, object : TypeToken<Map<Int, String>>() {}.type)
+            if (results != null) {
+                elements.forEachIndexed { index, element ->
+                    if (element is CustomFormResult) {
+                        results[index]?.let { element.setResult(it) }
+                    }
                 }
+                func()
+            } else {
+                closeFunc?.let { it() }
             }
-            func()
         } catch (e: JsonSyntaxException) {
             e.printStackTrace()
         }
