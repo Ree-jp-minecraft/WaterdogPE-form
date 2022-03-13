@@ -1,6 +1,6 @@
 package net.ree_jp.form.elements
 
-class StepSlider(private val text: String, private val steps: List<Int>, private val default: Int) :
+class StepSlider(private val text: String, private val steps: List<String>, private val default: Int) :
     CustomFormElement,
     CustomFormResult {
     private var result: Int = 0
@@ -13,5 +13,9 @@ class StepSlider(private val text: String, private val steps: List<Int>, private
 
     override fun getResult(): Int {
         return result
+    }
+
+    fun getResultValue(): String {
+        return steps[result]
     }
 }
