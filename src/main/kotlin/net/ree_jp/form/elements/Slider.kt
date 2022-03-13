@@ -6,8 +6,8 @@ class Slider(private val text: String, private val min: Int, private val max: In
 
     override fun toMap() = mapOf("type" to "slider", "text" to text, "min" to min, "max" to max, "default" to default)
 
-    override fun setResult(result: String) {
-        this.result = result.toInt()
+    override fun setResult(result: Any) {
+        this.result = (result as Double).toInt()
     }
 
     override fun getResult(): Int {

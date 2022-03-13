@@ -39,11 +39,12 @@ class CustomForm(private val title: String, private val func: Runnable, private 
         }
 
         try {
-            val results: Map<Int, String>? = Gson().fromJson(response, object : TypeToken<Map<Int, String>>() {}.type)
+            println(response)
+            val results: List<Any>? = Gson().fromJson(response, object : TypeToken<List<Any?>>() {}.type)
             if (results != null) {
                 elements.forEachIndexed { index, element ->
                     if (element is CustomFormResult) {
-                        results[index]?.let { element.setResult(it) }
+                        results[index].let { element.setResult(it) }
                     }
                 }
                 func.run()

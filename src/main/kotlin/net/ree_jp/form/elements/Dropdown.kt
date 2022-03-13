@@ -5,8 +5,8 @@ class Dropdown(private val text: String, private val options: List<String>) : Cu
 
     override fun toMap() = mapOf("type" to "dropdown", "text" to text, "options" to options)
 
-    override fun setResult(result: String) {
-        this.result = result.toInt()
+    override fun setResult(result: Any) {
+        this.result = (result as Double).toInt()
     }
 
     override fun getResult(): Int {

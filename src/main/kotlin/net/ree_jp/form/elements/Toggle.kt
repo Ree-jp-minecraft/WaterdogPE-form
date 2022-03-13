@@ -5,8 +5,8 @@ class Toggle(private val text: String, private val default: Boolean = false) : C
 
     override fun toMap() = mapOf("type" to "toggle", "text" to text, "default" to default)
 
-    override fun setResult(result: String) {
-        this.result = result.toBoolean()
+    override fun setResult(result: Any) {
+        this.result = result.toString().toBoolean()
     }
 
     override fun getResult(): Boolean {
