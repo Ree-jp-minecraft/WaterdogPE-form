@@ -39,7 +39,6 @@ class CustomForm(private val title: String, private val func: Runnable, private 
         }
 
         try {
-            println(response)
             val results: List<Any>? = Gson().fromJson(response, object : TypeToken<List<Any?>>() {}.type)
             if (results != null) {
                 elements.forEachIndexed { index, element ->

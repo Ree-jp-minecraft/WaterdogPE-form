@@ -1,10 +1,14 @@
 # WaterdogPE-form
 
-# GitHubPackages
+## Example
 
-## How to install
+https://github.com/Ree-jp-minecraft/WaterdogPE-form-example
 
-### build.gradle.kts
+## GitHubPackages
+
+### How to install
+
+#### build.gradle.kts
 
 ```kotlin
 repositories {
@@ -22,7 +26,7 @@ dependencies {
 }
 ```
 
-### gradle.properties
+#### gradle.properties
 
 ```
 gpr.user=your github name
