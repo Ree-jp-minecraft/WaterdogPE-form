@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "net.ree_jp"
-version = "0.1-SNAPSHOT"
+version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
