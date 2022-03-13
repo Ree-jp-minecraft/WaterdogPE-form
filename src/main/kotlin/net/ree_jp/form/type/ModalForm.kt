@@ -12,7 +12,7 @@ class ModalForm(
     private val content: String,
     private val trueButton: ModalFormButton,
     private val falseButton: ModalFormButton,
-    private val closeFunc: (() -> Unit)? = null
+    private val closeFunc: Runnable? = null
 ) : Form() {
 
     override fun sendForm(p: ProxiedPlayer) {
@@ -44,9 +44,7 @@ class ModalForm(
                 } else {
                     falseButton.call()
                 }
-            } else {
-                closeFunc?.let { it() }
-            }
+            } else closeFunc?.run()
         } catch (e: JsonSyntaxException) {
             e.printStackTrace()
         }

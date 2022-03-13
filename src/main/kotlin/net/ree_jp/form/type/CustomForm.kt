@@ -9,7 +9,7 @@ import net.ree_jp.form.FormStore
 import net.ree_jp.form.elements.CustomFormElement
 import net.ree_jp.form.elements.CustomFormResult
 
-class CustomForm(private val title: String, private val func: () -> Unit, private val closeFunc: (() -> Unit)? = null) :
+class CustomForm(private val title: String, private val func: Runnable, private val closeFunc: Runnable? = null) :
     Form() {
 
     private val elements = mutableListOf<CustomFormElement>()
@@ -46,10 +46,8 @@ class CustomForm(private val title: String, private val func: () -> Unit, privat
                         results[index]?.let { element.setResult(it) }
                     }
                 }
-                func()
-            } else {
-                closeFunc?.let { it() }
-            }
+                func.run()
+            } else closeFunc?.run()
         } catch (e: JsonSyntaxException) {
             e.printStackTrace()
         }

@@ -7,7 +7,7 @@ import dev.waterdog.waterdogpe.player.ProxiedPlayer
 import net.ree_jp.form.FormStore
 import net.ree_jp.form.elements.SimpleFormElement
 
-class SimpleForm(private val title: String, private val content: String, private val closeFunc: (() -> Unit)? = null) :
+class SimpleForm(private val title: String, private val content: String, private val closeFunc: Runnable? = null) :
     Form() {
 
     private val elements = mutableListOf<SimpleFormElement>()
@@ -40,9 +40,7 @@ class SimpleForm(private val title: String, private val content: String, private
             val buttonsID = Gson().fromJson(response, Int::class.java)
             if (buttonsID != null) {
                 elements[buttonsID].call()
-            } else {
-                closeFunc?.let { it() }
-            }
+            } else closeFunc?.run()
         } catch (e: JsonSyntaxException) {
             e.printStackTrace()
         }
