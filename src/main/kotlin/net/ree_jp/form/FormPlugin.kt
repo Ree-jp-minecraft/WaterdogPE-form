@@ -8,8 +8,7 @@ class FormPlugin : Plugin() {
 
     override fun onEnable() {
         proxy.eventManager.subscribe(PlayerLoginEvent::class.java) { ev ->
-            ev.player.pluginUpstreamHandler =
-                PacketHandler(ev.player.upstream, FormReceiveService(FormStore.instance, ev.player))
+            ev.player.pluginPacketHandlers.add(PacketHandler(FormReceiveService(FormStore.instance, ev.player)))
         }
     }
 }

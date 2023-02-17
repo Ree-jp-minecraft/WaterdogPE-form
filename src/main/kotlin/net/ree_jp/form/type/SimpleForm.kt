@@ -2,10 +2,10 @@ package net.ree_jp.form.type
 
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
-import com.nukkitx.protocol.bedrock.packet.ModalFormRequestPacket
 import dev.waterdog.waterdogpe.player.ProxiedPlayer
 import net.ree_jp.form.FormStore
 import net.ree_jp.form.elements.SimpleFormElement
+import org.cloudburstmc.protocol.bedrock.packet.ModalFormRequestPacket
 
 class SimpleForm(private val title: String, private val content: String, private val closeFunc: Runnable? = null) :
     Form() {

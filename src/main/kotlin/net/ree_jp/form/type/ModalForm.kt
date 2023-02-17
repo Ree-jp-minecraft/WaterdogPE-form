@@ -2,10 +2,10 @@ package net.ree_jp.form.type
 
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
-import com.nukkitx.protocol.bedrock.packet.ModalFormRequestPacket
 import dev.waterdog.waterdogpe.player.ProxiedPlayer
 import net.ree_jp.form.FormStore
 import net.ree_jp.form.elements.ModalFormButton
+import org.cloudburstmc.protocol.bedrock.packet.ModalFormRequestPacket
 
 // On some platforms, it is possible to force the form to close, but this will result in the same behavior as pressing the false button.
 class ModalForm(

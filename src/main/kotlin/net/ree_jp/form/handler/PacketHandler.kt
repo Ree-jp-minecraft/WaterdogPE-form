@@ -1,20 +1,20 @@
 package net.ree_jp.form.handler
 
-import com.nukkitx.protocol.bedrock.BedrockPacket
-import com.nukkitx.protocol.bedrock.BedrockSession
-import com.nukkitx.protocol.bedrock.packet.ModalFormResponsePacket
-import dev.waterdog.waterdogpe.utils.exceptions.CancelSignalException
-import dev.waterdog.waterdogpe.utils.types.PacketHandler
+import dev.waterdog.waterdogpe.network.PacketDirection
+import dev.waterdog.waterdogpe.network.protocol.handler.PluginPacketHandler
 import net.ree_jp.form.FormReceiveService
+import org.cloudburstmc.protocol.bedrock.packet.BedrockPacket
+import org.cloudburstmc.protocol.bedrock.packet.ModalFormResponsePacket
+import org.cloudburstmc.protocol.common.PacketSignal
 
-class PacketHandler(session: BedrockSession, private val service: FormReceiveService) : PacketHandler(session) {
+class PacketHandler(private val service: FormReceiveService) : PluginPacketHandler {
 
-    override fun handlePacket(pk: BedrockPacket): Boolean {
+    override fun handlePacket(pk: BedrockPacket, direction: PacketDirection): PacketSignal {
         if (pk is ModalFormResponsePacket) {
             if (service.receive(pk)) {
-                throw CancelSignalException()
+                return PacketSignal.HANDLED
             }
         }
-        return super.handlePacket(pk)
+        return PacketSignal.UNHANDLED
     }
 }

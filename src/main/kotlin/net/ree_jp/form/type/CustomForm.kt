@@ -3,11 +3,11 @@ package net.ree_jp.form.type
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 import com.google.gson.reflect.TypeToken
-import com.nukkitx.protocol.bedrock.packet.ModalFormRequestPacket
 import dev.waterdog.waterdogpe.player.ProxiedPlayer
 import net.ree_jp.form.FormStore
 import net.ree_jp.form.elements.CustomFormElement
 import net.ree_jp.form.elements.CustomFormResult
+import org.cloudburstmc.protocol.bedrock.packet.ModalFormRequestPacket
 
 class CustomForm(private val title: String, private val func: Runnable, private val closeFunc: Runnable? = null) :
     Form() {

@@ -1,7 +1,7 @@
 package net.ree_jp.form
 
-import com.nukkitx.protocol.bedrock.packet.ModalFormResponsePacket
 import dev.waterdog.waterdogpe.player.ProxiedPlayer
+import org.cloudburstmc.protocol.bedrock.packet.ModalFormResponsePacket
 
 class FormReceiveService(private val store: FormStore, private val p: ProxiedPlayer) {
 

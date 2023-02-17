@@ -12,10 +12,14 @@ repositories {
     maven(
         url = uri("https://repo.waterdog.dev/artifactory/main")
     )
+    maven(
+        url = uri("https://jitpack.io")
+    )
 }
 
 dependencies {
-    compileOnly("dev.waterdog.waterdogpe:waterdog:1.1.5")
+//    compileOnly("dev.waterdog.waterdogpe:waterdog:1.2.*")
+    compileOnly("com.github.WaterdogPE:WaterdogPE:waterdog-2-SNAPSHOT")
     implementation(kotlin("stdlib"))
 }
 
