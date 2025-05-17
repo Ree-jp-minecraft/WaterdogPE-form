@@ -17,6 +17,14 @@ repositories {
         name = "waterdogpeRepoSnapshots"
         url = uri("https://repo.waterdog.dev/snapshots")
     }
+    maven {
+        name = "opencollabRepositoryMavenReleases"
+        url = uri("https://repo.opencollab.dev/maven-releases")
+    }
+    maven {
+        name = "opencollabRepositoryMavenSnapshots"
+        url = uri("https://repo.opencollab.dev/maven-snapshots")
+    }
     maven(
         url = uri("https://jitpack.io")
     )
