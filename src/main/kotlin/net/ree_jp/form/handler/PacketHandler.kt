@@ -1,6 +1,6 @@
 package net.ree_jp.form.handler
 
-import dev.waterdog.waterdogpe.network.PacketDirection
+import org.cloudburstmc.protocol.bedrock.PacketDirection;
 import dev.waterdog.waterdogpe.network.protocol.handler.PluginPacketHandler
 import net.ree_jp.form.FormReceiveService
 import org.cloudburstmc.protocol.bedrock.packet.BedrockPacket
