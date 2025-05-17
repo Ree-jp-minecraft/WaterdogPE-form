@@ -9,9 +9,14 @@ version = "2.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
-    maven(
-        url = uri("https://repo.waterdog.dev/artifactory/main")
-    )
+    maven {
+        name = "waterdogpeRepoReleases"
+        url = uri("https://repo.waterdog.dev/releases")
+    }
+    maven {
+        name = "waterdogpeRepoSnapshots"
+        url = uri("https://repo.waterdog.dev/snapshots")
+    }
     maven(
         url = uri("https://jitpack.io")
     )
@@ -19,7 +24,7 @@ repositories {
 
 dependencies {
 //    compileOnly("dev.waterdog.waterdogpe:waterdog:1.2.*")
-    compileOnly("com.github.WaterdogPE:WaterdogPE:waterdog-2-SNAPSHOT")
+    compileOnly("dev.waterdog.waterdogpe:waterdog:2.0.4-SNAPSHOT")
     implementation(kotlin("stdlib"))
 }
 
